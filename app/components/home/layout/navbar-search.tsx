@@ -36,10 +36,7 @@ function NavbarSearch() {
           brands: []
         }
       }
-
-      const response = await api.get<SearchResult>(`/search/${search}`)
-
-      return await response.json()
+      return await api<SearchResult>(`search/${search}`).json()
     }
   })
 
@@ -138,7 +135,7 @@ const CommandContent = memo(
           {data?.categories.map(object => (
             <CommandItem key={object.id} className="gap-2" asChild>
               <Link
-                to={`/categorias/${object.slug}`}
+                to={`/productos?categoria=${object.slug}`}
                 onClick={closeCommandDialog}
                 viewTransition
               >

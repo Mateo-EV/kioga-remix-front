@@ -3,7 +3,7 @@ import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
 import { cn } from "@/lib/utils"
 
-const Avatar = React.forwardRef<
+const AvatarNative = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
 >(({ className, ...props }, ref) => (
@@ -16,7 +16,7 @@ const Avatar = React.forwardRef<
     {...props}
   />
 ))
-Avatar.displayName = AvatarPrimitive.Root.displayName
+AvatarNative.displayName = AvatarPrimitive.Root.displayName
 
 const AvatarImage = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Image>,
@@ -45,4 +45,28 @@ const AvatarFallback = React.forwardRef<
 ))
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
 
-export { Avatar, AvatarImage, AvatarFallback }
+const getInitials = (name: string) => {
+  const words = name.trim().split(" ")
+  if (words.length === 1) {
+    return words[0]!.substring(0, 2).toUpperCase()
+  }
+  return (words[0]![0]! + words[1]![0]!).toUpperCase()
+}
+
+const Avatar = React.forwardRef<
+  React.ElementRef<typeof AvatarNative>,
+  React.ComponentPropsWithoutRef<typeof AvatarNative> & { name: string }
+>(({ name, ...props }, ref) => {
+  const initials = getInitials(name)
+
+  return (
+    <AvatarNative ref={ref} {...props}>
+      <span className="flex h-full w-full items-center justify-center rounded-full bg-neutral-50 text-neutral-800">
+        {initials}
+      </span>
+    </AvatarNative>
+  )
+})
+Avatar.displayName = "Avatar"
+
+export { Avatar, AvatarNative, AvatarImage, AvatarFallback }

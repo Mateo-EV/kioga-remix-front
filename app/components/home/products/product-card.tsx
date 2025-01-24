@@ -29,7 +29,7 @@ export const ProductCard = ({ product, ...props }: ProductCardProps) => {
         </p>
         <div className="text-sm text-muted-foreground">
           <Link
-            to={"/categorias/" + product.category.slug}
+            to={"/productos?categoria=" + product.category.slug}
             className="underline-offset-4 hover:underline"
             viewTransition
           >

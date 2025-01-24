@@ -1,11 +1,9 @@
 import { H1 } from "@/components/home/typography"
 import { BreadcrumbController } from "@/components/ui/breadcrumb"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
 import useGetCategories from "@/hooks/categories/use-get-categories"
 import getEnv from "@/lib/env"
 import { MetaGenerator } from "@/lib/metadata"
-import { Suspense } from "react"
 import { Link } from "react-router"
 
 export const meta = () =>
@@ -43,7 +41,7 @@ const CategoriesList = () => {
   return (
     <div className="relative flex flex-wrap items-center justify-center gap-10">
       {categories?.map(({ id, name, slug, image }) => (
-        <Link viewTransition to={"/categorias/" + slug} key={id}>
+        <Link viewTransition to={"/productos?categoria=" + slug} key={id}>
           <Card>
             <CardHeader>
               <CardTitle className="text-center">{name}</CardTitle>

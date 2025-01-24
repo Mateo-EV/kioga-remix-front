@@ -18,15 +18,15 @@ export const NAV_ITEMS_CONTENT = [
         title: "Cases · Gabinetes",
         links: [
           {
-            href: "/categorias/cases?tipo=con-fuente",
+            href: "/productos?categoria=cases&tipo=con-fuente",
             text: "Con fuente"
           },
           {
-            href: "/categorias/cases?tipo=sin-fuente",
+            href: "/productos?categoria=cases&tipo=sin-fuente",
             text: "Sin fuente"
           },
           {
-            href: "/categorias/cases?tipo=accesorios",
+            href: "/productos?categoria=cases&tipo=accesorios",
             text: "Accesorios"
           }
         ]
@@ -35,11 +35,11 @@ export const NAV_ITEMS_CONTENT = [
         title: "Placas · Motherboards",
         links: [
           {
-            href: "/categorias/placas?tipo=amd",
+            href: "/productos?categoria=placas&tipo=amd",
             text: "AMD"
           },
           {
-            href: "/categorias/placas?tipo=intel",
+            href: "/productos?categoria=placas&tipo=intel",
             text: "Intel"
           }
         ]
@@ -48,11 +48,11 @@ export const NAV_ITEMS_CONTENT = [
         title: "Procesadores",
         links: [
           {
-            href: "/categorias/procesadores?tipo=amd",
+            href: "/productos?categoria=procesadores&tipo=amd",
             text: "AMD"
           },
           {
-            href: "/categorias/procesadores?tipo=intel",
+            href: "/productos?categoria=procesadores&tipo=intel",
             text: "Intel"
           }
         ]
@@ -61,11 +61,11 @@ export const NAV_ITEMS_CONTENT = [
         title: "Memoria Ram",
         links: [
           {
-            href: "/categorias/memoria-ram?tipo=ram-dimm-escritorio",
+            href: "/productos?categoria=memoria-ram&tipo=ram-dimm-escritorio",
             text: "Escritorio"
           },
           {
-            href: "/categorias/memoria-ram?tipo=ram-sodimm-laptops",
+            href: "/productos?categoria=memoria-ram&tipo=ram-sodimm-laptops",
             text: "Laptops"
           }
         ]
@@ -74,15 +74,15 @@ export const NAV_ITEMS_CONTENT = [
         title: "Almacenamiento",
         links: [
           {
-            href: "/categorias/almacenamiento?tipo=sdd-sata",
+            href: "/productos?categoria=almacenamiento&tipo=sdd-sata",
             text: "SDD SATA"
           },
           {
-            href: "/categorias/almacenamiento?tipo=sdd-m2-nvme",
+            href: "/productos?categoria=almacenamiento&tipo=sdd-m2-nvme",
             text: "SSD NVME"
           },
           {
-            href: "/categorias/almacenamiento?tipo=hdd",
+            href: "/productos?categoria=almacenamiento&tipo=hdd",
             text: "HDD"
           }
         ]
@@ -91,11 +91,11 @@ export const NAV_ITEMS_CONTENT = [
         title: "Tarjetas de Video",
         links: [
           {
-            href: "/categorias/tarjetas-de-video?tipo=nvidia",
+            href: "/productos?categoria=tarjetas-de-video&tipo=nvidia",
             text: "Nvidia"
           },
           {
-            href: "/categorias/tarjetas-de-video?tipo=amd",
+            href: "/productos?categoria=tarjetas-de-video&tipo=amd",
             text: "AMD"
           }
         ]
@@ -104,11 +104,11 @@ export const NAV_ITEMS_CONTENT = [
         title: "Refrigeración · Enfriamiento",
         links: [
           {
-            href: "/categorias/refrigeracion?tipo=liquido",
+            href: "/productos?categoria=refrigeracion&tipo=liquido",
             text: "Líquido"
           },
           {
-            href: "/categorias/refrigeracion?tipo=aire",
+            href: "/productos?categoria=refrigeracion&tipo=aire",
             text: "Aire"
           }
         ]
@@ -117,7 +117,7 @@ export const NAV_ITEMS_CONTENT = [
         title: "Fuentes",
         links: [
           {
-            href: "/categorias/fuentes",
+            href: "/productos?categoria=fuentes",
             text: "Certificadas 80+"
           }
         ]
@@ -126,7 +126,7 @@ export const NAV_ITEMS_CONTENT = [
         title: "Pasta Térmica",
         links: [
           {
-            href: "/categorias/pasta-termica",
+            href: "/productos?categoria=pasta-termica",
             text: "Ver Todo"
           }
         ]
@@ -137,39 +137,39 @@ export const NAV_ITEMS_CONTENT = [
     content: "Periféricos",
     links: [
       {
-        href: "/categorias/perifericos?tipo=mouse",
+        href: "/productos?categoria=perifericos&tipo=mouse",
         text: "Mouse"
       },
       {
-        href: "/categorias/perifericos?tipo=teclados",
+        href: "/productos?categoria=perifericos&tipo=teclados",
         text: "Teclados"
       },
       {
-        href: "/categorias/perifericos?tipo=audifonos",
+        href: "/productos?categoria=perifericos&tipo=audifonos",
         text: "Audifonos"
       },
       {
-        href: "/categorias/perifericos?tipo=mousepads",
+        href: "/productos?categoria=perifericos&tipo=mousepads",
         text: "Mousepads"
       },
       {
-        href: "/categorias/perifericos?tipo=microfonos",
+        href: "/productos?categoria=perifericos&tipo=microfonos",
         text: "Microfonos"
       },
       {
-        href: "/categorias/perifericos?tipo=mandos-joysticks",
+        href: "/productos?categoria=perifericos&tipo=mandos-joysticks",
         text: "Mandos"
       },
       {
-        href: "/categorias/perifericos?tipo=webcams",
+        href: "/productos?categoria=perifericos&tipo=webcams",
         text: "Webcams"
       },
       {
-        href: "/categorias/perifericos?tipo=combos-packs",
+        href: "/productos?categoria=perifericos&tipo=combos-packs",
         text: "Packs"
       },
       {
-        href: "/categorias/perifericos?tipo=accesorios-de-teclado",
+        href: "/productos?categoria=perifericos&tipo=accesorios-de-teclado",
         text: "Accesorios de teclado"
       }
     ]
@@ -178,19 +178,19 @@ export const NAV_ITEMS_CONTENT = [
     content: "Otros",
     links: [
       {
-        href: "/categorias/monitores",
+        href: "/productos?categoria=monitores",
         text: "Monitores"
       },
       {
-        href: "/categorias/escritorios",
+        href: "/productos?categoria=escritorios",
         text: "Escritorios"
       },
       {
-        href: "/categorias/estabilizadores",
+        href: "/productos?categoria=estabilizadores",
         text: "Estabilizadores"
       },
       {
-        href: "/categorias/laptops",
+        href: "/productos?categoria=laptops",
         text: "Laptops"
       }
     ]

@@ -5,6 +5,7 @@ import NavbarScroll from "./navbar-scroll"
 import NavbarUser from "./navbar-user"
 import NavbarSearch from "./navbar-search"
 import NavbarMobileItems from "./navbar-mobile-items"
+import NavbarCart from "./navbar-cart"
 
 function Navbar() {
   return (
@@ -26,7 +27,7 @@ function Navbar() {
           <div className="order-3 flex w-full animate-fade-in items-center justify-end opacity-0 delay-500 fill-mode-forwards">
             <NavbarUser />
             <NavbarSearch />
-            {/* <NavbarCart /> */}
+            <NavbarCart />
             <NavbarMobileItems />
           </div>
         </nav>

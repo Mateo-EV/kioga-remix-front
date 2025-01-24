@@ -1,11 +1,19 @@
 import { buttonVariants } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
+import useAuth from "@/hooks/use-auth"
 import { cn } from "@/lib/utils"
 import { Link } from "react-router"
+import NavbarUserDropdown from "./navbar-dropdown-user"
 
 function NavbarUser() {
-  const user = null
+  const { session, isLoading } = useAuth()
 
-  if (!user)
+  if (isLoading)
+    return (
+      <Skeleton containerClassName="size-10" className="size-full" circle />
+    )
+
+  if (!session)
     return (
       <Link
         className={cn(buttonVariants({ size: "sm", className: "mr-1" }))}
@@ -16,8 +24,7 @@ function NavbarUser() {
       </Link>
     )
 
-  // return <NavbarUserDropdown user={user} />;
-  return null
+  return <NavbarUserDropdown session={session} />
 }
 
 export default NavbarUser

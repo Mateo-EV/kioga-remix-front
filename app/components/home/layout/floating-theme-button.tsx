@@ -9,7 +9,7 @@ export default function FloatingThemeButton() {
     setTheme(prevTheme => (prevTheme === "dark" ? "light" : "dark"))
 
   return (
-    <div className="fixed bottom-4 right-4 z-[100]">
+    <div className="fixed bottom-4 left-4 z-[200]">
       <Button
         variant="outline"
         size="circle"

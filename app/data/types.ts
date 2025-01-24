@@ -34,3 +34,23 @@ export type Brand = {
   slug: string
   image: string
 }
+
+export type CursorPagination<T> = {
+  items: T[]
+  nextCursor?: number | null
+}
+
+// Nexted Object
+type Primitive = string | number | boolean
+type NestedArray = Primitive[] | NestedObject[]
+
+type NestedObject = {
+  [key: string]: Primitive | NestedArray | NestedObject
+}
+
+export type Session = {
+  id: number
+  name: string
+  email: string
+  isEmailValid: boolean
+}

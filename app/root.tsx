@@ -23,6 +23,7 @@ import getEnv from "./lib/env"
 
 import "react-loading-skeleton/dist/skeleton.css"
 import ThemeProvider from "./providers/theme-provider"
+import { Toaster } from "sonner"
 
 export const links: Route.LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet }
@@ -44,7 +45,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
       </head>
       <body className="antialiased relative min-w-72 font-sans">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster richColors />
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

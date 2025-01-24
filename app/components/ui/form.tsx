@@ -5,15 +5,16 @@ import * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
 import {
   Controller,
-  ControllerProps,
-  FieldPath,
-  FieldValues,
+  type ControllerProps,
+  type FieldPath,
+  type FieldValues,
   FormProvider,
   useFormContext
 } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
+import { Input } from "./input"
 
 const Form = FormProvider
 
@@ -166,13 +167,70 @@ const FormMessage = React.forwardRef<
 })
 FormMessage.displayName = "FormMessage"
 
+const FormInput = React.forwardRef<
+  HTMLInputElement,
+  React.ComponentProps<"input">
+>(({ className, ...props }, ref) => {
+  const { error } = useFormField()
+
+  return (
+    <Input
+      ref={ref}
+      className={cn(error && "focus-visible:ring-red-500", className)}
+      {...props}
+    />
+  )
+})
+FormInput.displayName = "FormInput"
+
+const FormController = <
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>({
+  render,
+  label,
+  inputProps = { type: "text" },
+  containerProps,
+  ...props
+}: Omit<ControllerProps<TFieldValues, TName>, "render"> & {
+  render?: ControllerProps<TFieldValues, TName>["render"]
+  label?: string
+  inputProps?: React.ComponentPropsWithRef<"input">
+  containerProps?: React.ComponentPropsWithRef<typeof FormItem>
+}) => {
+  return (
+    <FormField
+      {...props}
+      render={
+        render
+          ? render
+          : ({ field }) => (
+              <FormItem {...containerProps}>
+                <FormLabel>{label}</FormLabel>
+                <FormControl>
+                  <FormInput
+                    type={inputProps.type}
+                    {...inputProps}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )
+      }
+    />
+  )
+}
+
 export {
-  useFormField,
   Form,
+  FormControl,
+  FormController,
+  FormDescription,
+  FormField,
+  FormInput,
   FormItem,
   FormLabel,
-  FormControl,
-  FormDescription,
   FormMessage,
-  FormField
+  useFormField
 }
