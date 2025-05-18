@@ -1,14 +1,12 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ButtonWithLoading } from "@/components/ui/button"
-import getEnv from "@/lib/env"
 import { api } from "@/lib/ky"
 import { MetaGenerator } from "@/lib/metadata"
 import { MailCheckIcon } from "lucide-react"
 import { useState, useTransition } from "react"
 import { toast } from "sonner"
 
-export const meta = () =>
-  MetaGenerator({ app_url: getEnv().APP_URL, title: "Verificar Email" })
+export const meta = () => MetaGenerator({ title: "Verificar Email" })
 
 export default function VerifyEmailPage() {
   const [isLogginOut, startLogginOut] = useTransition()

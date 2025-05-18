@@ -1,11 +1,9 @@
 import { FilterProducts } from "@/components/home/products/filter-products"
 import GalleryProducts from "@/components/home/products/gallery-products"
 import { H1 } from "@/components/home/typography"
-import getEnv from "@/lib/env"
 import { MetaGenerator } from "@/lib/metadata"
 
-export const meta = () =>
-  MetaGenerator({ app_url: getEnv().APP_URL, title: "Productos" })
+export const meta = () => MetaGenerator({ title: "Productos" })
 
 export default function ProductsPage() {
   return (

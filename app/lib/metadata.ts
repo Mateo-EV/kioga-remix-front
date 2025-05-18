@@ -1,11 +1,13 @@
 import { SITE_CONFIG } from "@/data/const"
+import getEnv from "./env"
 
 type MetaGeneratorProps = {
   title?: string
-  app_url: string
 }
 
-export function MetaGenerator({ title, app_url }: MetaGeneratorProps) {
+export function MetaGenerator(props?: MetaGeneratorProps) {
+  const { title } = props || {}
+  const app_url = getEnv().APP_URL
   return [
     { title: "Kioga" + (title ? ` | ${title}` : "") },
     { name: "description", content: SITE_CONFIG.description },

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import type { Product } from "@/data/types"
 import { useCart } from "@/hooks/use-cart"
+import getEnv from "@/lib/env"
 import { cn, formatPrice } from "@/lib/utils"
 import { ShoppingCartIcon } from "lucide-react"
 import { useMemo } from "react"
@@ -12,6 +13,8 @@ import { Link } from "react-router"
 type ProductCardProps = React.ComponentPropsWithoutRef<typeof Card> & {
   product: Product
 }
+
+const backendUrl = getEnv().BACKEND_URL
 
 export const ProductCard = ({ product, ...props }: ProductCardProps) => {
   const { addProduct } = useCart()
@@ -48,7 +51,7 @@ export const ProductCard = ({ product, ...props }: ProductCardProps) => {
       <Link to={"/productos/" + product.slug}>
         <CardContent className="relative mx-auto aspect-square overflow-hidden rounded-lg">
           <img
-            src={product.image}
+            src={`${backendUrl}${product.image}`}
             alt="producto-1"
             className={cn(
               "object-cover transition hover:scale-110 size-full",

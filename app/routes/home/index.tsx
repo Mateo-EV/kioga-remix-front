@@ -12,7 +12,7 @@ import WeekProductsSection from "@/components/home/sections/week-products-sectio
 import CategoriesSection from "@/components/home/sections/categories-section"
 import { BrandsCarousel } from "@/components/home/carousel/brands-carousel"
 
-export const meta = () => MetaGenerator({ app_url: getEnv().APP_URL })
+export const meta = () => MetaGenerator()
 
 export default function HomePage() {
   return (

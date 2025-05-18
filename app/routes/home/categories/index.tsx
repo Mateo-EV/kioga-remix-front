@@ -2,12 +2,10 @@ import { H1 } from "@/components/home/typography"
 import { BreadcrumbController } from "@/components/ui/breadcrumb"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import useGetCategories from "@/hooks/categories/use-get-categories"
-import getEnv from "@/lib/env"
 import { MetaGenerator } from "@/lib/metadata"
 import { Link } from "react-router"
 
-export const meta = () =>
-  MetaGenerator({ app_url: getEnv().APP_URL, title: "Categorías" })
+export const meta = () => MetaGenerator({ title: "Categorías" })
 
 export default function CategoriesPage() {
   return (
