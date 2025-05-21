@@ -2,10 +2,13 @@ import { H1 } from "@/components/home/typography"
 import { BreadcrumbController } from "@/components/ui/breadcrumb"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import useGetCategories from "@/hooks/categories/use-get-categories"
+import getEnv from "@/lib/env"
 import { MetaGenerator } from "@/lib/metadata"
 import { Link } from "react-router"
 
 export const meta = () => MetaGenerator({ title: "Categorías" })
+
+const backendUrl = getEnv().BACKEND_URL
 
 export default function CategoriesPage() {
   return (
@@ -46,7 +49,7 @@ const CategoriesList = () => {
             </CardHeader>
             <CardContent>
               <img
-                src={image}
+                src={backendUrl + image}
                 alt={name}
                 width={370}
                 height={180}

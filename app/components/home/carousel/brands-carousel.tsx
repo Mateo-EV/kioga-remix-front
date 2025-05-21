@@ -10,8 +10,11 @@ import {
 } from "@/components/ui/carousel"
 import { Skeleton } from "@/components/ui/skeleton"
 import useGetBrands from "@/hooks/brands/use-get-brands"
+import getEnv from "@/lib/env"
 import { useEffect, useState } from "react"
 import { Link } from "react-router"
+
+const backendUrl = getEnv().BACKEND_URL
 
 export const BrandsCarousel = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>()
@@ -43,7 +46,7 @@ export const BrandsCarousel = () => {
                   className="flex size-full items-center justify-center rounded-lg border bg-zinc-100 p-3"
                 >
                   <img
-                    src={brand.image}
+                    src={backendUrl + brand.image}
                     alt={brand.name}
                     width={50}
                     height={50}
