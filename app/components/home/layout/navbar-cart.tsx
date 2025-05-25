@@ -19,6 +19,7 @@ import scrollbarStyle from "@/assets/css/scrollbar.module.css"
 import { useCart, type ProductCart as ProductCartProps } from "@/hooks/use-cart"
 import { Link } from "react-router"
 import ManageCartQuantity from "../cart/manage-cart-quantity"
+import getEnv from "@/lib/env"
 
 function NavbarCart() {
   const { products, removeAllProducts } = useCart()
@@ -111,6 +112,8 @@ function NavbarCart() {
   )
 }
 
+const backendUrl = getEnv().BACKEND_URL
+
 export const ProductCart = ({ product }: { product: ProductCartProps }) => {
   const { setQuantityByProductId, removeProduct } = useCart()
 
@@ -118,7 +121,7 @@ export const ProductCart = ({ product }: { product: ProductCartProps }) => {
     <Card className="mb-2">
       <div className="flex items-center">
         <img
-          src={product.image}
+          src={backendUrl + product.image}
           alt={product.slug}
           width={90}
           height={90}

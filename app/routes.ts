@@ -10,6 +10,8 @@ export default [
     index("routes/home/index.tsx"),
     route("categorias", "routes/home/categories/index.tsx"),
     route("productos", "routes/home/products/index.tsx"),
+    route("productos/:slug", "routes/home/products/[slug]/index.tsx"),
+
     layout("routes/home/auth/layout.tsx", [
       route("login", "routes/home/auth/login.tsx"),
       route("register", "routes/home/auth/register.tsx"),

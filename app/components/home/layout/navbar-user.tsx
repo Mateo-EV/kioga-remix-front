@@ -1,18 +1,11 @@
 import { buttonVariants } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
-import useAuth from "@/hooks/use-auth"
 import { cn } from "@/lib/utils"
 import { Link } from "react-router"
 import NavbarUserDropdown from "./navbar-dropdown-user"
+import { useAuth } from "@/providers/auth-provider"
 
 function NavbarUser() {
-  const { session, isLoading } = useAuth()
-
-  if (isLoading)
-    return (
-      <Skeleton containerClassName="size-10" className="size-full" circle />
-    )
-
+  const session = useAuth()
   if (!session)
     return (
       <Link

@@ -1,16 +1,24 @@
 import { H1 } from "@/components/home/typography"
 import { BreadcrumbController } from "@/components/ui/breadcrumb"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import useGetCategories from "@/hooks/categories/use-get-categories"
+import type { Category } from "@/data/types"
 import getEnv from "@/lib/env"
+import { api } from "@/lib/ky"
 import { MetaGenerator } from "@/lib/metadata"
-import { Link } from "react-router"
+import { Link, useLoaderData } from "react-router"
+
+export async function loader() {
+  const categories = await api<Category[]>("categories").json()
+  return { categories }
+}
 
 export const meta = () => MetaGenerator({ title: "Categorías" })
 
 const backendUrl = getEnv().BACKEND_URL
 
 export default function CategoriesPage() {
+  const { categories } = useLoaderData<typeof loader>()
+
   return (
     <section className="container space-y-4 py-6 md:py-10">
       <H1 className="text-center">Categorías</H1>
@@ -22,26 +30,15 @@ export default function CategoriesPage() {
         ]}
         actualPage="Categorías"
       />
-      <CategoriesList />
+      <CategoriesList categories={categories} />
     </section>
   )
 }
 
-// const CategoriesListSkeleton = () => {
-//   return (
-//     <div className="relative flex flex-wrap items-center justify-center gap-10">
-//       {Array.from({ length: 9 }).map((_, i) => (
-//         <Skeleton key={i} className="size-full" containerClassName="size-96" />
-//       ))}
-//     </div>
-//   )
-// }
-
-const CategoriesList = () => {
-  const { data: categories } = useGetCategories()
+const CategoriesList = ({ categories }: { categories: Category[] }) => {
   return (
     <div className="relative flex flex-wrap items-center justify-center gap-10">
-      {categories?.map(({ id, name, slug, image }) => (
+      {categories.map(({ id, name, slug, image }) => (
         <Link viewTransition to={"/productos?categoria=" + slug} key={id}>
           <Card>
             <CardHeader>

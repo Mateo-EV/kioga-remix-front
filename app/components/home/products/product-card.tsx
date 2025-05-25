@@ -7,7 +7,7 @@ import { useCart } from "@/hooks/use-cart"
 import getEnv from "@/lib/env"
 import { cn, formatPrice } from "@/lib/utils"
 import { ShoppingCartIcon } from "lucide-react"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { Link } from "react-router"
 
 type ProductCardProps = React.ComponentPropsWithoutRef<typeof Card> & {
@@ -23,6 +23,8 @@ export const ProductCard = ({ product, ...props }: ProductCardProps) => {
     () => product.price - product.price * product.discount,
     [product.price, product.discount]
   )
+
+  const [viewTransitionName, setViewTransitionName] = useState<string>()
 
   return (
     <Card {...props}>
@@ -48,7 +50,7 @@ export const ProductCard = ({ product, ...props }: ProductCardProps) => {
           </Link>
         </div>
       </CardHeader>
-      <Link to={"/productos/" + product.slug}>
+      <Link to={"/productos/" + product.slug} viewTransition>
         <CardContent className="relative mx-auto aspect-square overflow-hidden rounded-lg">
           <img
             src={`${backendUrl}${product.image}`}
@@ -57,6 +59,13 @@ export const ProductCard = ({ product, ...props }: ProductCardProps) => {
               "object-cover transition hover:scale-110 size-full",
               product.stock === 0 && "grayscale"
             )}
+            onMouseOver={() =>
+              setViewTransitionName("product-image-" + product.slug)
+            }
+            onMouseOut={() => {
+              setViewTransitionName(undefined)
+            }}
+            style={{ viewTransitionName: viewTransitionName }}
           />
         </CardContent>
       </Link>

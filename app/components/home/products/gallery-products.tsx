@@ -28,8 +28,6 @@ const GalleryProducts = () => {
 
   const products = data?.pages.flatMap(response => response.items)
 
-  console.log(products)
-
   if (!products) return <GalleryProductsSkeleton />
 
   if (products.length === 0)
