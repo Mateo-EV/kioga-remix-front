@@ -14,22 +14,52 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
+  ScrollRestoration,
+  useLoaderData,
+  type LoaderFunctionArgs
 } from "react-router"
 
 import type { Route } from "./+types/root"
 import stylesheet from "./app.css?url"
 import getEnv from "./lib/env"
 
+import ky from "ky"
 import "react-loading-skeleton/dist/skeleton.css"
-import ThemeProvider from "./providers/theme-provider"
 import { Toaster } from "sonner"
+import type { Session } from "./data/types"
+import AuthProvider from "./providers/auth-provider"
+import ThemeProvider from "./providers/theme-provider"
+import { getCookie } from "./lib/utils"
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  try {
+    const cookie = request.headers.get("Cookie")
+
+    if (!cookie) {
+      return { session: null }
+    }
+
+    const token = getCookie("kioga_token", cookie)
+    const session = await ky<Session>(
+      getEnv().BACKEND_URL + "/api/auth/profile",
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    ).json()
+
+    return { session }
+  } catch (error) {
+    return { session: null }
+  }
+}
 
 export const links: Route.LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet }
 ]
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { session } = useLoaderData<typeof loader>()
+
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
@@ -45,11 +75,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
       </head>
       <body className="antialiased relative min-w-72 font-sans">
-        <ThemeProvider>
-          {children}
-          <Toaster richColors />
-        </ThemeProvider>
-        <ScrollRestoration />
+        <AuthProvider session={session}>
+          <ThemeProvider>
+            {children}
+            <Toaster richColors />
+          </ThemeProvider>
+          <ScrollRestoration />
+        </AuthProvider>
         <Scripts />
       </body>
     </html>

@@ -30,28 +30,36 @@ function CredentialsForm({ isLoginPage = false }: CredentialsFormProps) {
   })
   const navigate = useNavigate()
   const [isPending, startTransition] = useTransition()
-  const queryClient = useQueryClient()
 
   const onSubmit = async (
     values: loginUserSchemaType | registerUserSchemaType
   ) => {
     try {
       if (isLoginPage) {
-        await api
-          .post<{ message: string }>("auth/login", {
-            json: values
+        try {
+          await api
+            .post<{ message: string }>("auth/login", {
+              json: values
+            })
+            .json()
+
+          startTransition(() => {
+            navigate("/")
           })
-          .json()
+        } catch (error) {
+          const err = error as HTTPError
 
-        startTransition(() => {
-          // if (response.message === "email-not-verified") {
-          //   navigate("/verify-email")
-          // } else {
-          navigate("/")
-          // }
+          const message = await err.response?.json()
+          const errorMessage = (message as { message?: string })
+            ?.message as string
 
-          // router.refresh();
-        })
+          if (errorMessage === "El usuario no está verificado") {
+            navigate("/verify-email")
+            return
+          }
+
+          throw error
+        }
       } else {
         await api.post("auth/register", {
           json: {
@@ -61,21 +69,16 @@ function CredentialsForm({ isLoginPage = false }: CredentialsFormProps) {
           }
         })
         startTransition(() => {
-          // navigate("/verify-email")
-          // router.refresh();
+          navigate("/verificar-email")
         })
       }
-
-      queryClient.invalidateQueries({ queryKey: ["session"] })
     } catch (error) {
       const err = error as HTTPError
 
-      if (err.response?.status !== 400) throw err
+      const errorData = await err.response?.json()
+      const errorMessage = (errorData as { message?: string })?.message
 
-      const errorMessage = await err.response?.text()
-      console.log(errorMessage)
-
-      if (errorMessage === "This email already exists") {
+      if (errorMessage === "Este email ya está en uso") {
         form.setError("email", {
           type: "validate",
           message: "Este email ya está en uso"

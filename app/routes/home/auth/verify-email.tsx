@@ -18,16 +18,16 @@ export default function VerifyEmailPage() {
     })
   }
 
-  const [status, setStatus] = useState<string | null>(null)
+  const [message, setMessage] = useState<string | null>(null)
 
   const resendEmailVerification = () => {
     startSendingEmail(async () => {
       try {
-        const status = await api
-          .post<{ status: string }>("auth/resend-verification")
-          .text()
+        const { message } = await api
+          .post<{ message: string }>("auth/resend-verification")
+          .json()
 
-        setStatus(status)
+        setMessage(message)
       } catch (error) {
         toast.error("No se pudo reenviar el correo de verificación.")
       }
@@ -60,9 +60,8 @@ export default function VerifyEmailPage() {
         </ButtonWithLoading>
       </div>
 
-      {status === "verification-link-sent" && (
+      {message === "Se ha reenviado el correo de verificación." && (
         <Alert>
-          <MailCheckIcon className="size-4" />
           <AlertTitle>Reenviado</AlertTitle>
           <AlertDescription>
             Se ha enviado un nuevo enlace de verificación a la dirección de

@@ -19,17 +19,20 @@ import { LogOutIcon, ShoppingBasketIcon, UserIcon } from "lucide-react"
 import { useState, useTransition } from "react"
 import { api } from "@/lib/ky"
 import type { Session } from "@/data/types"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 
 function NavbarUserDropdown({ session }: { session: Session }) {
   const [isLogginOut, startLogginOut] = useTransition()
 
   const [profileModalOpen, setProfileModalOpen] = useState(false)
 
+  const navigate = useNavigate()
+
   const handleLogOut = (e: React.MouseEvent) => {
     e.preventDefault()
     startLogginOut(async () => {
-      await api.post("/logout")
+      await api.post("auth/logout")
+      navigate(".")
     })
   }
 
