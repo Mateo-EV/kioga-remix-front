@@ -1,8 +1,24 @@
 import GamingSetUpImage from "@/assets/img/gaming-setup.png"
 import { Card, CardContent } from "@/components/ui/card"
-import { Outlet } from "react-router"
+import { useAuth } from "@/providers/auth-provider"
+import { useEffect } from "react"
+import { Outlet, useLocation, useNavigate } from "react-router"
 
 export default function HomeAuthLayout() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const session = useAuth()
+
+  useEffect(() => {
+    if (session && location.pathname === "/login") {
+      navigate("/")
+    }
+
+    if (session && location.pathname === "/register") {
+      navigate("/")
+    }
+  }, [session])
+
   return (
     <>
       <section className="container flex justify-center py-12">

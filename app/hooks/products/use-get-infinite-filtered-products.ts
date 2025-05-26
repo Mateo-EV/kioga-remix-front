@@ -44,6 +44,16 @@ export default function useGetInfiniteFilteredProducts() {
         params.delete("tipo")
       }
 
+      if (params.get("min")) {
+        params.set("minPrice", params.get("min")!)
+        params.delete("min")
+      }
+
+      if (params.get("max")) {
+        params.set("maxPrice", params.get("max")!)
+        params.delete("max")
+      }
+
       if (pageParam) {
         params.set("cursor", pageParam as string)
       }

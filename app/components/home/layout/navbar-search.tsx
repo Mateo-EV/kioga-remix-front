@@ -15,6 +15,7 @@ import useDebouncedState from "@/hooks/use-debounce-state"
 import { api } from "@/lib/ky"
 import type { Brand, Category, Product } from "@/data/types"
 import { Link } from "react-router"
+import getEnv from "@/lib/env"
 
 type SearchResult = {
   products: Product[]
@@ -71,6 +72,8 @@ function NavbarSearch() {
   )
 }
 
+const backendUrl = getEnv().BACKEND_URL
+
 const CommandContent = memo(
   ({
     isLoading,
@@ -119,7 +122,7 @@ const CommandContent = memo(
               >
                 <div className="size-10 rounded-md bg-card/20 p-2">
                   <img
-                    src={object.image}
+                    src={backendUrl + object.image}
                     alt={object.name}
                     width={32}
                     height={32}
@@ -141,7 +144,7 @@ const CommandContent = memo(
               >
                 <div className="size-10 rounded-md bg-card/20 p-2">
                   <img
-                    src={object.image}
+                    src={backendUrl + object.image}
                     alt={object.name}
                     width={32}
                     height={32}
@@ -163,7 +166,7 @@ const CommandContent = memo(
               >
                 <div className="size-10 rounded-md bg-card/20 p-2">
                   <img
-                    src={object.image}
+                    src={backendUrl + object.image}
                     alt={object.name}
                     width={32}
                     height={32}

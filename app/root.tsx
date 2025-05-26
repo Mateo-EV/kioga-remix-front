@@ -23,34 +23,16 @@ import type { Route } from "./+types/root"
 import stylesheet from "./app.css?url"
 import getEnv from "./lib/env"
 
-import ky from "ky"
 import "react-loading-skeleton/dist/skeleton.css"
 import { Toaster } from "sonner"
-import type { Session } from "./data/types"
+import { getSession } from "./data/server/auth"
 import AuthProvider from "./providers/auth-provider"
 import ThemeProvider from "./providers/theme-provider"
-import { getCookie } from "./lib/utils"
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  try {
-    const cookie = request.headers.get("Cookie")
+  const session = await getSession(request)
 
-    if (!cookie) {
-      return { session: null }
-    }
-
-    const token = getCookie("kioga_token", cookie)
-    const session = await ky<Session>(
-      getEnv().BACKEND_URL + "/api/auth/profile",
-      {
-        headers: { Authorization: `Bearer ${token}` }
-      }
-    ).json()
-
-    return { session }
-  } catch (error) {
-    return { session: null }
-  }
+  return { session }
 }
 
 export const links: Route.LinksFunction = () => [

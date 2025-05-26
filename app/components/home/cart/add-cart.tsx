@@ -31,6 +31,7 @@ function AddCart({ product }: AddCartProps) {
 
       <Button
         className="w-full gap-2"
+        disabled={product.stock === 0}
         onClick={() =>
           addProduct({
             ...product,
