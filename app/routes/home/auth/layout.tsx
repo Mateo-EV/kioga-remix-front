@@ -17,6 +17,10 @@ export default function HomeAuthLayout() {
     if (session && location.pathname === "/register") {
       navigate("/")
     }
+
+    if (!session && location.pathname === "/verificar-email") {
+      navigate("/login")
+    }
   }, [session])
 
   return (

@@ -3,10 +3,13 @@ import { redirect, type LoaderFunctionArgs } from "react-router"
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request)
-  console.log(session)
 
-  if (!session || !session.isEmailVerified) {
+  if (!session) {
     return redirect("/login")
+  }
+
+  if (!session.isEmailVerified) {
+    return redirect("/verificar-email")
   }
 
   return { session }

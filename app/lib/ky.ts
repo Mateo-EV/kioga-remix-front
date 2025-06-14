@@ -1,6 +1,5 @@
 import ky from "ky"
 import getEnv from "./env"
-import { getCookie } from "./utils"
 
 export const api = ky.create({
   prefixUrl: getEnv().BACKEND_URL + "/api",

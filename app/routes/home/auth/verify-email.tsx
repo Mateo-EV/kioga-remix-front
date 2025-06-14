@@ -2,7 +2,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ButtonWithLoading } from "@/components/ui/button"
 import { api } from "@/lib/ky"
 import { MetaGenerator } from "@/lib/metadata"
-import { MailCheckIcon } from "lucide-react"
 import { useState, useTransition } from "react"
 import { toast } from "sonner"
 

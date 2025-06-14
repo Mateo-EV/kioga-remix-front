@@ -1,4 +1,4 @@
-import { ButtonWithLoading, buttonVariants } from "@/components/ui/button"
+import { ButtonWithLoading } from "@/components/ui/button"
 import { Form, FormController } from "@/components/ui/form"
 import { useForm } from "@/hooks/use-form"
 import { api } from "@/lib/ky"
@@ -8,11 +8,9 @@ import {
   type loginUserSchemaType,
   type registerUserSchemaType
 } from "@/lib/schemas"
-import { cn } from "@/lib/utils"
-import { useQueryClient } from "@tanstack/react-query"
 import type { HTTPError } from "ky"
 import { useTransition } from "react"
-import { Link, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 
 type CredentialsFormProps = {
   isLoginPage?: boolean
@@ -36,30 +34,15 @@ function CredentialsForm({ isLoginPage = false }: CredentialsFormProps) {
   ) => {
     try {
       if (isLoginPage) {
-        try {
-          await api
-            .post<{ message: string }>("auth/login", {
-              json: values
-            })
-            .json()
-
-          startTransition(() => {
-            navigate("/")
+        await api
+          .post<{ message: string }>("auth/login", {
+            json: values
           })
-        } catch (error) {
-          const err = error as HTTPError
+          .json()
 
-          const message = await err.response?.json()
-          const errorMessage = (message as { message?: string })
-            ?.message as string
-
-          if (errorMessage === "El usuario no está verificado") {
-            navigate("/verify-email")
-            return
-          }
-
-          throw error
-        }
+        startTransition(() => {
+          navigate("/")
+        })
       } else {
         await api.post("auth/register", {
           json: {
@@ -75,7 +58,8 @@ function CredentialsForm({ isLoginPage = false }: CredentialsFormProps) {
     } catch (error) {
       const err = error as HTTPError
 
-      const errorData = await err.response?.json()
+      const errorData = await err.response.json()
+
       const errorMessage = (errorData as { message?: string })?.message
 
       if (errorMessage === "Este email ya está en uso") {
