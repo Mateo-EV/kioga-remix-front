@@ -12,6 +12,7 @@ export default [
     route("productos", "routes/home/products/index.tsx"),
     route("productos/:slug", "routes/home/products/[slug]/index.tsx"),
     route("checkout", "routes/home/checkout/index.tsx"),
+    route("pedidos", "routes/home/orders/index.tsx"),
 
     layout("routes/home/auth/layout.tsx", [
       route("login", "routes/home/auth/login.tsx"),

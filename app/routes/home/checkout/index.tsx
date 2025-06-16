@@ -1,3 +1,5 @@
+import CheckoutContent from "@/components/home/checkout/checkout-content"
+import { H1 } from "@/components/home/typography"
 import { getSession } from "@/data/server/auth"
 import { redirect, type LoaderFunctionArgs } from "react-router"
 
@@ -16,5 +18,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function CheckoutPage() {
-  return <div>Checkout</div>
+  return <section className="container space-y-6 py-6 md:py-10">
+      <H1>Checkout</H1>
+      <CheckoutContent />
+    </section>
 }
