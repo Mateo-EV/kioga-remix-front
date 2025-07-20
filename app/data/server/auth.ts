@@ -6,13 +6,16 @@ import ky from "ky"
 export async function getSession(request: Request): Promise<Session | null> {
   try {
     const cookie = request.headers.get("Cookie")
+    console.log(cookie)
 
     if (!cookie) {
       return null
     }
 
     const token = getCookie("kioga_token", cookie)
-    console.log(token)
+    if (!token) {
+      return null
+    }
 
     const session = await ky<Session>(
       getEnv().BACKEND_URL + "/api/auth/profile",
@@ -23,8 +26,6 @@ export async function getSession(request: Request): Promise<Session | null> {
 
     return session
   } catch (error) {
-    console.log(error)
-
     return null
   }
 }
