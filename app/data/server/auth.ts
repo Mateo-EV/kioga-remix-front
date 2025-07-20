@@ -12,6 +12,8 @@ export async function getSession(request: Request): Promise<Session | null> {
     }
 
     const token = getCookie("kioga_token", cookie)
+    console.log(token)
+
     const session = await ky<Session>(
       getEnv().BACKEND_URL + "/api/auth/profile",
       {
@@ -21,6 +23,8 @@ export async function getSession(request: Request): Promise<Session | null> {
 
     return session
   } catch (error) {
+    console.log(error)
+
     return null
   }
 }
